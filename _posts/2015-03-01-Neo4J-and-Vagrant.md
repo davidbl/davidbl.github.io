@@ -36,7 +36,10 @@ Detected incorrectly shut down database, performing recovery..
 Detected incorrectly shut down database, performing recovery..
 ````
 
-Some googling around led me to believe that installing Neo4j in the shared directory (/vagrant) was the issue.
+Some googling around led me to believe that installing Neo4j in the shared directory (/vagrant) was the issue,
+due to virtualBox's issues with having memory-mapped files in the shared directory. (neo4j makes use of memory-mapped IO, see [this link](http://neo4j.com/docs/stable/configuration-io-examples.html)
+for more details)
+
 And, sure enough, extracting the file to another directory inside the vagrant box did the trick.  Neo4j now started with no issue.
 
 But....
