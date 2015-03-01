@@ -4,12 +4,15 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+My name is David Blackmon
 
 ### More Information
 
-A place to include any other types of information that you'd like to include about yourself.
+I am an American developer living in London.
+Currenlty I am writing Ruby/Rails for a living, but I also dabble in things like
+machine learning, R, Scala, clojure, Haskell, erlang, elixir, etc.
+
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[davidkblackmon@gmail.com](mailto:davidkblackmon@gmail.com)
