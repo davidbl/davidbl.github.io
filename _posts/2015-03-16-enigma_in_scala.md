@@ -67,3 +67,17 @@ object Enigma {
   }
 }
 ```
+
+And it works!!!
+
+```bash
+scala> import Enigma._
+
+scala> val machine = Machine(buildRotor,buildRotor,buildRotor,buildReflector(26),buildPlugBoard)
+
+scala> val encrypted = engimaize(machine, "NOWISTHETIMEFORALLGOODMEN")
+encrypted: String = IKBTVFSFNBGGKABZPDDJQKVFS
+
+scala> val decrypted = engimaize(machine, encrypted)
+decrypted: String = NOWISTHETIMEFORALLGOODMEN)))
+```
