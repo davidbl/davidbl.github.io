@@ -89,12 +89,15 @@ pressed, a reflector whose output mirrored its input, eg
 
 Let's try it
 
+
 ```scala
+...
   def buildNullReflector(size: Int): Reflector = {
     val chars = shuffledChars.take(size)
     Reflector(charList.zip(charList).toMap)
   }
 ...
+```
 
 
 ```bash
