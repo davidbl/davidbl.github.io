@@ -50,7 +50,7 @@ object Enigma {
   def rotate[A](xs: List[A], dist: Int): List[A] =
     xs.drop(dist) ::: xs.take(dist)
 
-  def engimaize(machine: Machine, input: String): String = {
+  def enigmaize(machine: Machine, input: String): String = {
     input.zipWithIndex.map{ case (c,i) =>
       val push = machine.plugBoard.read _ andThen
         readRotor(machine.r1)(0)(i)_ andThen
@@ -75,9 +75,46 @@ scala> import Enigma._
 
 scala> val machine = Machine(buildRotor,buildRotor,buildRotor,buildReflector(26),buildPlugBoard)
 
-scala> val encrypted = engimaize(machine, "NOWISTHETIMEFORALLGOODMEN")
+scala> val encrypted = enigmaize(machine, "NOWISTHETIMEFORALLGOODMEN")
 encrypted: String = IKBTVFSFNBGGKABZPDDJQKVFS
 
-scala> val decrypted = engimaize(machine, encrypted)
+scala> val decrypted = enigmaize(machine, encrypted)
 decrypted: String = NOWISTHETIMEFORALLGOODMEN)))
 ```
+
+As I was studying the [diagram](http://red-badger.com/blog/wp-content/uploads/2015/02/wiringdiagram.png) from the original post, I noticed
+that it appeared that, since the rotors only rotated when a key was
+pressed, a reflector whose output mirrored its input, eg
+'A' -> 'A', 'B' -> 'B'...,  would essentially *turn off* the encryption.
+
+Let's try it
+
+```scala
+  def buildNullReflector(size: Int): Reflector = {
+    val chars = shuffledChars.take(size)
+    Reflector(charList.zip(charList).toMap)
+  }
+...
+
+
+```bash
+scala> import Enigma._
+
+scala> val nullReflector = buildNullReflector(26)
+
+scala> nullReflector.read('A')
+res0: Char = A
+
+scala> nullReflector.read('Z')
+res1: Char = Z
+
+// note the nullReflector
+scala> val nullMachine = Machine(buildRotor,buildRotor,buildRotor,nullReflector,buildPlugBoard)
+scala> enigmaize(nullMachine,"ABCDEF")
+res3: String = ABCDEF
+
+scala> enigmaize(nullMachine,"THEQUICKBROWNFOX")
+res4: String = THEQUICKBROWNFOX)))
+```
+
+I am not sure what that means in terms of cryptography,  just an interesting observation
