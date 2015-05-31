@@ -69,6 +69,7 @@ end
 ```
 
 Number 5
+
 ```ruby
 #brute force
 def arrangments(sum=100)
