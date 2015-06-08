@@ -45,18 +45,21 @@ public static void FilterSelectionSet()
 
 The thing that bothers me the most is having to build that ugly TypedValue array
 
-````csharp
+```csharp
 TypedValue[] acTypValAr = new TypedValue[1];
 acTypValAr.SetValue(new TypedValue((int)DxfCode.Start, \"CIRCLE\"), 0);
-````
+```
 Being an old LISP hacker,  I know most of the DxfCodes (8 for layer, 0 for type, 62 for color, etc) or I can find them easily.  But why am I forced to remember those codes at all?  If I know that I want to filter on type or layer or color, why do I have to either know the appropriate code or cast the enum member to an int.  And why do I have to keep up with the index  (ie, that 0 just after \"CIRCLE\"),  )?
 Why can't I just do something like
+
 ```ruby
 filter = SsFilter.new
 filter.Layer = "my_layer"
 filter.Type = "Circle"
 ```
+
 Well now I can.  I have extended my [acadhelper](http://github.com/davidbl/acadhelper) to include a new class called SsFilter
+
 ```ruby
 class SsFilter
   attr_accessor :data
@@ -95,6 +98,7 @@ end
 This new class uses a bit of method_missing magic to create a very friendly and readable way of creating a selection set filter.
 
 The C# code above can now, using other methods from my acadhelper gem,  be written as 
+
 ```ruby
 require 'rubygems'
 require 'acadhelper'
@@ -112,6 +116,7 @@ end
 
 And I did have to make a minor change to the select_on_screen method to support the new filter class
 and still allow for hand-built filter arrays
+
 ```ruby
 def select_on_screen( filter_data=[])
   begin
