@@ -8,9 +8,9 @@ My name is David Blackmon
 
 ### More Information
 
-I am an American developer living in London.
-Currently I am writing Ruby/Rails for a living, but I also dabble in things like
-machine learning, R, Scala, clojure, Haskell, erlang, elixir, etc.
+I am a developer living in West Palm Beach, FL.
+Currently writing Haskell for a living, but have written a lot of Ruby and Rails.
+I also dabble in things like machine learning, R, Scala, clojure, Haskell, erlang, elixir, etc.
 
 
 ### Contact me
